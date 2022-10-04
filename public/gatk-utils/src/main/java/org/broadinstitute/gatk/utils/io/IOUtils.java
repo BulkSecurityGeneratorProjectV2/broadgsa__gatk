@@ -37,6 +37,7 @@ import org.broadinstitute.gatk.utils.exceptions.UserException;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.file.Files;
 import java.util.*;
 
 public class IOUtils {
@@ -93,11 +94,7 @@ public class IOUtils {
                 tempDirParent = FileUtils.getTempDirectory();
             if (!tempDirParent.exists() && !tempDirParent.mkdirs())
                 throw new UserException.BadTmpDir("Could not create temp directory: " + tempDirParent);
-            File temp = File.createTempFile(prefix, suffix, tempDirParent);
-            if (!temp.delete())
-                throw new UserException.BadTmpDir("Could not delete sub file: " + temp.getAbsolutePath());
-            if (!temp.mkdir())
-                throw new UserException.BadTmpDir("Could not create sub directory: " + temp.getAbsolutePath());
+            File temp = Files.createTempDirectory(tempDirParent.toPath(), prefix + suffix).toFile();
             return absolute(temp);
         } catch (IOException e) {
             throw new UserException.BadTmpDir(e.getMessage());
