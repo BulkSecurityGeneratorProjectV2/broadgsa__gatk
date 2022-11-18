@@ -42,6 +42,7 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -291,7 +292,7 @@ public class BAMSchedule implements CloseableIterator<BAMScheduleEntry> {
      */
     private void createScheduleFile() {
         try {
-            scheduleFile = File.createTempFile("bamschedule."+referenceSequence,null);
+            scheduleFile = Files.createTempFile("bamschedule." + referenceSequence, null).toFile();
             scheduleFileChannel = new RandomAccessFile(scheduleFile,"rw").getChannel();
         }
         catch(IOException ex) {

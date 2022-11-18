@@ -35,6 +35,7 @@ import org.broadinstitute.gatk.utils.exceptions.ReviewedGATKException;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * Created by IntelliJ IDEA.
@@ -55,7 +56,7 @@ public abstract class ReadProcessingBenchmark extends SimpleBenchmark {
 
         File tempFile = null;
         try {
-            tempFile = File.createTempFile("testfile_"+getMaxReads(),".bam");
+            tempFile = Files.createTempFile("testfile_" + getMaxReads(), ".bam").toFile();
         }
         catch(IOException ex) {
             throw new ReviewedGATKException("Unable to create temporary BAM",ex);

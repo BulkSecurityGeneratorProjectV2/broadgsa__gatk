@@ -53,6 +53,7 @@ import org.testng.SkipException;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -296,7 +297,7 @@ public abstract class BaseTest {
      */
     public static File createTempFile(final String name, final String extension) {
         try {
-            final File file = File.createTempFile(name, extension);
+            final File file = Files.createTempFile(name, extension).toFile();
             file.deleteOnExit();
 
             // Mark corresponding indices for deletion on exit as well just in case an index is created for the temp file:

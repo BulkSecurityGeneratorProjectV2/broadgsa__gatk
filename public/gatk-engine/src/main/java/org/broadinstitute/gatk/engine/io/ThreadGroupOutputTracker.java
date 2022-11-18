@@ -34,6 +34,7 @@ import org.broadinstitute.gatk.utils.exceptions.UserException;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -162,7 +163,7 @@ public class ThreadGroupOutputTracker extends OutputTracker {
      */
     private <T> File createTempFile( Stub<T> stub ) {
         try {
-            return File.createTempFile( stub.getClass().getName(), null );
+            return Files.createTempFile(stub.getClass().getName(), null).toFile();
         } catch( IOException ex ) {
             throw new UserException.BadTmpDir("Unable to create temporary file for stub: " + stub.getClass().getName() );
         }

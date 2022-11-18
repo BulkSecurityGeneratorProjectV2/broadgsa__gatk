@@ -48,6 +48,7 @@ import org.broadinstitute.gatk.utils.sam.GATKSAMRecord;
 import org.broadinstitute.gatk.utils.sam.ReadUtils;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -584,7 +585,7 @@ public class RecalUtils {
         final PrintStream csvStream;
         final File csvTempFile = null;
         try {
-            File csvTmpFile = File.createTempFile("BQSR",".csv");
+            File csvTmpFile = Files.createTempFile("BQSR", ".csv").toFile();
             csvTmpFile.deleteOnExit();
             csvStream = new PrintStream(csvTmpFile);
         } catch (IOException e) {

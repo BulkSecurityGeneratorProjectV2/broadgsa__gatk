@@ -47,6 +47,7 @@ import org.broadinstitute.gatk.utils.text.XReadLines;
 import htsjdk.variant.variantcontext.*;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -205,7 +206,7 @@ public class VariantsToBinaryPed extends RodWalker<Integer,Integer> {
                     // only need to instantiate the files and buffers if in individual major.
                     // Cut down on memory.
                     try {
-                        File temp = File.createTempFile("VariantsToBPed_"+sample, ".tmp");
+                        File temp = Files.createTempFile("VariantsToBPed_" + sample, ".tmp").toFile();
                         temp.deleteOnExit();
                         printMap.put(sample,new PrintStream(temp));
                         tempFiles.put(sample,temp);

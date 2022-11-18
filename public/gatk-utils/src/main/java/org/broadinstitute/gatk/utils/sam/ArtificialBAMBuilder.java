@@ -32,6 +32,7 @@ import org.broadinstitute.gatk.utils.NGSPlatform;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -180,7 +181,7 @@ public class ArtificialBAMBuilder {
      */
     public File makeTemporarilyBAMFile() {
         try {
-            final File file = File.createTempFile("tempBAM", ".bam");
+            final File file = Files.createTempFile("tempBAM", ".bam").toFile();
             file.deleteOnExit();
 
             // Register the bam index file for deletion on exit as well:
